@@ -103,7 +103,7 @@ pull_initialize () {
 	# Overwrite local database tables
 	$SUDO sqlite3 $gravity_db "DELETE FROM adlist;"
 	$SUDO sqlite3 $gravity_db -header -csv ".import adlist.csv adlist"
-	$SUDO sqlite3 $gravity_db "DROP TABLE domainlist;"
+	$SUDO sqlite3 $gravity_db "DELETE FROM domainlist;"
 	$SUDO sqlite3 $gravity_db -header -csv ".import domainlist.csv domainlist"
 
 	# Restart Pi-hole to pick up changes
@@ -164,7 +164,7 @@ pull () {
         $SUDO cp $cname_list $dnsmasq_dir
         $SUDO sqlite3 $gravity_db "DELETE FROM adlist;"
         $SUDO sqlite3 $gravity_db -header -csv ".import adlist.csv adlist"
-        $SUDO sqlite3 $gravity_db "DROP TABLE domainlist;"
+        $SUDO sqlite3 $gravity_db "DELETE FROM domainlist;"
         $SUDO sqlite3 $gravity_db -header -csv ".import domainlist.csv domainlist"
         $SUDO $docker_command pihole -g
         echo 'Done!';
